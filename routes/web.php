@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CollegeController;
+use App\Http\Controllers\StudentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,3 +18,12 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+// College Routes - Defines all CRUD operations for colleges
+Route::resource('colleges', CollegeController::class);
+
+// Student Routes - Defines all CRUD operations for students
+Route::resource('students', StudentController::class);
+
+// Custom route for filtering students by college
+Route::get('/students/filter/{college_id}', [StudentController::class, 'filterByCollege'])->name('students.filter');
