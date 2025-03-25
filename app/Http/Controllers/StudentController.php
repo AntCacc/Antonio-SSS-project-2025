@@ -2,63 +2,110 @@
 
 namespace App\Http\Controllers;
 
+
+use App\Models\Student;
+use App\Models\College;
 use Illuminate\Http\Request;
 
 class StudentController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of students with optional filtering by college.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $colleges = College::all(); // Fetch all colleges for filtering
+        $students = Student::query();
+
+        if ($request->has('college_id') && $request->college_id != '') {
+            $students->where('college_id', $request->college_id); // Filter by selected college
+        }
+
+        $students = $students->orderBy('name')->get(); // Fetch students sorted by name
+
+        return view('students.index', compact('students', 'colleges'));
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Show the form for creating a new student.
      */
     public function create()
     {
-        //
+        $colleges = College::all(); // Fetch all colleges for selection
+        return view('students.create', compact('colleges'));
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created student in storage.
      */
     public function store(Request $request)
     {
-        //
+        // Validate the form inputs
+        $request->validate([
+            'name' => 'required|max:255',
+            'email' => 'required|email|unique:students,email',
+            'phone' => 'required|digits:8',
+            'dob' => 'required|date',
+            'college_id' => 'required|exists:colleges,id',
+        ]);
+
+        // Create and save the student
+        Student::create($request->all());
+
+        // Redirect back with a success message
+        return redirect()->route('students.index')->with('success', 'Student added successfully!');
+    }
+
+
+     /**
+     * Show the form for editing an existing student.
+     */
+    public function edit(Student $student)
+    {
+        $colleges = College::all(); // Fetch all colleges for dropdown
+        return view('students.edit', compact('student', 'colleges'));
     }
 
     /**
-     * Display the specified resource.
+     * Update the specified student in the database.
      */
-    public function show(string $id)
+    public function update(Request $request, Student $student)
     {
-        //
+        // Validate the input fields
+        $request->validate([
+            'name' => 'required|max:255',
+            'email' => 'required|email|unique:students,email,' . $student->id,
+            'phone' => 'required|digits:8',
+            'dob' => 'required|date',
+            'college_id' => 'required|exists:colleges,id',
+        ]);
+
+        // Update the student details
+        $student->update($request->all());
+
+        // Redirect back with a success message
+        return redirect()->route('students.index')->with('success', 'Student updated successfully!');
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Remove the specified student from the database.
      */
-    public function edit(string $id)
+    public function destroy(Student $student)
     {
-        //
+        $student->delete(); // Delete the student
+
+        // Redirect back with a success message
+        return redirect()->route('students.index')->with('success', 'Student deleted successfully!');
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
 
     /**
-     * Remove the specified resource from storage.
+     * Custom function to filter students by college.
      */
-    public function destroy(string $id)
+    public function filterByCollege($college_id)
     {
-        //
+        $students = Student::where('college_id', $college_id)->orderBy('name')->get();
+        return view('students.index', compact('students'));
     }
+
 }
