@@ -16,7 +16,7 @@ use App\Http\Controllers\StudentController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('colleges.index'); // Redirect to the colleges list
 });
 
 // College Routes - Defines all CRUD operations for colleges

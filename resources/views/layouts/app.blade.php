@@ -13,7 +13,7 @@
         }
     </style>
 </head>
-<body class="bg-gray-100 font-sans">
+<body class="flex flex-col min-h-screen bg-gray-100 font-sans">
     <!-- Top Navigation Bar -->
     <div class="bg-blue-900 text-white py-4">
         <div class="container mx-auto flex items-center justify-between px-4">
@@ -28,12 +28,12 @@
     </div>
 
     <!-- Main Content -->
-    <div class="container mx-auto mt-8 px-4">
+    <div class="container mx-auto mt-8 px-4 flex-grow">
         @yield('content')
     </div>
 
     <!-- Footer with Dark Grey Background -->
-    <footer class="bg-gray-800 text-white text-center py-4 mt-10">
+    <footer class="bg-gray-800 text-white text-center py-4 mt-auto">
         <p>&copy; 2025 College and Student Management System. All Rights Reserved.</p>
     </footer>
 </body>

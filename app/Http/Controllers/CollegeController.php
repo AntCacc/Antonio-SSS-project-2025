@@ -12,9 +12,10 @@ class CollegeController extends Controller
      */
     public function index()
     {
-        $colleges = College::all(); // Fetch all colleges from the database
-        return view('colleges.index', compact('colleges')); // Pass colleges to the view
+        $colleges = College::all();
+        return view('colleges.colleges', compact('colleges')); // Updated path
     }
+
 
     /**
      * Show the form for creating a new resource.
