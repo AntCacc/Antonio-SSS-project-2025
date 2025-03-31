@@ -20,7 +20,7 @@ Route::get('/', function () {
 });
 
 // College Routes - Defines all CRUD operations for colleges
-Route::resource('colleges', CollegeController::class);
+Route::resource('colleges', CollegeController::class)->except(['destroy']); // Disable deletion
 
 // Student Routes - Defines all CRUD operations for students
 Route::resource('students', StudentController::class);

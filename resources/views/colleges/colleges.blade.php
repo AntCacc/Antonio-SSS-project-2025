@@ -33,12 +33,9 @@
                             <a href="{{ route('colleges.show', $college->id) }}" class="text-blue-500 hover:text-blue-700 ml-2">
                                 <i class="fas fa-eye"></i>
                             </a>                            
-                            <a href="{{ route('colleges.edit', $college->id) }}" class="text-yellow-500 hover:text-yellow-700">Edit</a>
-                            <form action="{{ route('colleges.destroy', $college->id) }}" method="POST" class="inline-block">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="text-red-500 hover:text-red-700 ml-2" onclick="return confirm('Are you sure?')">Delete</button>
-                            </form>
+                            <a href="{{ route('colleges.edit', $college->id) }}" class="text-yellow-500 hover:text-yellow-700 ml-2">
+                                <i class="fas fa-edit"></i>
+                            </a>
                         </td>
                     </tr>
                 @endforeach

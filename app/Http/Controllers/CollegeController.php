@@ -78,14 +78,4 @@ class CollegeController extends Controller
     }
 
 
-    /**
-     * Remove the specified college from the database.
-     */
-    public function destroy(College $college)
-    {
-        $college->delete(); // Delete the selected college
-
-        // Redirect back with a success message
-        return redirect()->route('colleges.index')->with('success', 'College deleted successfully!');
-    }
 }
