@@ -23,7 +23,7 @@ class StudentController extends Controller
 
         $students = $students->orderBy('name')->get(); // Fetch students sorted by name
 
-        return view('students.index', compact('students', 'colleges'));
+        return view('students.students', compact('students', 'colleges')); // Updated Blade path
     }
 
     /**
@@ -32,7 +32,7 @@ class StudentController extends Controller
     public function create()
     {
         $colleges = College::all(); // Fetch all colleges for selection
-        return view('students.create', compact('colleges'));
+        return view('students.create-edit', compact('colleges')); //use a single create-edit Blade file
     }
 
     /**
@@ -63,7 +63,7 @@ class StudentController extends Controller
     public function edit(Student $student)
     {
         $colleges = College::all(); // Fetch all colleges for dropdown
-        return view('students.edit', compact('student', 'colleges'));
+        return view('students.create-edit', compact('student', 'colleges')); // Using the same Blade for create & edit
     }
 
     /**
@@ -105,7 +105,7 @@ class StudentController extends Controller
     public function filterByCollege($college_id)
     {
         $students = Student::where('college_id', $college_id)->orderBy('name')->get();
-        return view('students.index', compact('students'));
+        return view('students.students', compact('students')); 
     }
 
 }
