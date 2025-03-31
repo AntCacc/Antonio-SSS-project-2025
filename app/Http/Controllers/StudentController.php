@@ -27,6 +27,15 @@ class StudentController extends Controller
     }
 
     /**
+     * Display the specified student.
+     */
+    public function show(Student $student)
+    {
+        return view('students.show', compact('student'));
+    }
+
+
+    /**
      * Show the form for creating a new student.
      */
     public function create()

@@ -30,6 +30,9 @@
                         <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">{{ $college->name }}</td>
                         <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">{{ $college->address }}</td>
                         <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                            <a href="{{ route('colleges.show', $college->id) }}" class="text-blue-500 hover:text-blue-700 ml-2">
+                                <i class="fas fa-eye"></i>
+                            </a>                            
                             <a href="{{ route('colleges.edit', $college->id) }}" class="text-yellow-500 hover:text-yellow-700">Edit</a>
                             <form action="{{ route('colleges.destroy', $college->id) }}" method="POST" class="inline-block">
                                 @csrf

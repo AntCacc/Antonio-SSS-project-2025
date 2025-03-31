@@ -16,6 +16,13 @@ class CollegeController extends Controller
         return view('colleges.colleges', compact('colleges')); // Updated path
     }
 
+    /**
+     * Display the specified college.
+     */
+    public function show(College $college)
+    {
+        return view('colleges.show', compact('college'));
+    }
 
     /**
      * Show the form for creating a new resource.

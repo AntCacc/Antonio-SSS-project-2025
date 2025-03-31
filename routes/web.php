@@ -23,7 +23,7 @@ Route::get('/', function () {
 Route::resource('colleges', CollegeController::class);
 
 // Student Routes - Defines all CRUD operations for students
-Route::resource('students', StudentController::class)->except(['show']); //not using a separate show page
+Route::resource('students', StudentController::class);
 
 // Custom route for filtering students by college
 Route::get('/students/filter/{college_id}', [StudentController::class, 'filterByCollege'])
