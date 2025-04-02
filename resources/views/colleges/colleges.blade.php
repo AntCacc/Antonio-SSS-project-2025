@@ -1,15 +1,27 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container mx-auto mt-8 px-4">
-    <h1 class="text-2xl font-semibold text-gray-800 mb-4">Colleges List</h1>
-
-    <!-- Success Message -->
+<div class="container mx-auto mt-8 px-4 mb-12">
+    <!-- Success Message with Auto-Dismiss -->
     @if(session('success'))
-        <div class="bg-green-500 text-white p-2 mb-4 rounded">
+        <div id="success-alert" class="bg-green-500 text-white p-3 rounded-md mb-4">
             {{ session('success') }}
         </div>
+
+        <script>
+            setTimeout(() => {
+                const alertBox = document.getElementById('success-alert');
+                if (alertBox) {
+                    alertBox.style.transition = "opacity 0.5s";
+                    alertBox.style.opacity = "0";
+                    setTimeout(() => alertBox.remove(), 500);
+                }
+            }, 3000); // Hide after 3 seconds
+        </script>
     @endif
+
+    <!-- College List Heading -->
+    <h2 class="text-2xl font-semibold text-gray-800 mb-4">Colleges List</h2>
 
     <!-- Add College Button -->
     <a href="{{ route('colleges.create') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-6 inline-block">Add College</a>

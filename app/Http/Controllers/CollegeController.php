@@ -29,7 +29,7 @@ class CollegeController extends Controller
      */
     public function create()
     {
-        return view('colleges.create'); // Return the form view to add a new college
+        return view('colleges.create-edit'); // Use the shared create-edit view
     }
 
     /**
@@ -56,7 +56,7 @@ class CollegeController extends Controller
      */
     public function edit(College $college)
     {
-        return view('colleges.edit', compact('college')); // Return the edit form with college data
+        return view('colleges.create-edit', compact('college')); // Pass the college data for editing
     }
 
     /**
