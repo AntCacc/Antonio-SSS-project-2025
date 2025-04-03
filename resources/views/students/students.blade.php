@@ -13,6 +13,8 @@
     <!-- Filter Section -->
     @include('students.partials.filter')
 
+    <!-- Sort Component -->
+    @include('students.partials.sort')
 
     <!-- Table Section -->
     <div class="overflow-x-auto bg-white rounded-md shadow-md p-4 mb-10">

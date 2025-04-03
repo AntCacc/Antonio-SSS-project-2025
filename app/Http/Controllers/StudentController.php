@@ -21,8 +21,10 @@ class StudentController extends Controller
             $students->where('college_id', $request->college_id); // Filter by selected college
         }
 
-        $students = $students->orderBy('name')->get(); // Fetch students sorted by name
-
+        // Apply sorting if specified
+        $sortOrder = $request->get('sort', 'asc');
+        $students = $students->orderBy('name', $sortOrder)->get();
+        
         return view('students.students', compact('students', 'colleges')); // Updated Blade path
     }
 
