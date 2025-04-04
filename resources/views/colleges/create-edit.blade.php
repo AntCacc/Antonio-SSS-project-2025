@@ -11,8 +11,15 @@
             {{ isset($college) ? 'Edit College' : 'Add College' }}
         </h2>
 
+        <!-- Global validation error alert -->
+        @if ($errors->any())
+            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-6">
+                <strong class="font-bold">Please fix the errors below.</strong>
+            </div>
+        @endif
+
         <!-- College form starts here -->
-        <form method="POST" action="{{ isset($college) ? route('colleges.update', $college->id) : route('colleges.store') }}">
+        <form method="POST" action="{{ isset($college) ? route('colleges.update', $college->id) : route('colleges.store') }}" novalidate>
             @csrf
             @if(isset($college))
                 @method('PUT')
