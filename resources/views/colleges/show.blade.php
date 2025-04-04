@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container mx-auto mt-8 px-4">
+<div class="container mx-auto mt-8 px-4 mb-12">
     <div class="bg-white rounded-md shadow-md p-6">
         <h1 class="text-2xl font-semibold text-gray-800 mb-4">College Details</h1>
 
