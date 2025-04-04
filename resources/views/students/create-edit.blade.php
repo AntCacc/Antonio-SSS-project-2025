@@ -12,7 +12,7 @@
 
         <!-- Student form starts here -->
         <!-- The form action dynamically switches between store and update routes based on whether a student exists -->
-        <form method="POST" action="{{ isset($student) ? route('students.update', $student->id) : route('students.store') }}">
+        <form method="POST" action="{{ isset($student) ? route('students.update', $student->id) : route('students.store') }}" novalidate>
             @include('students.partials.student-form')
         </form>
     </div>

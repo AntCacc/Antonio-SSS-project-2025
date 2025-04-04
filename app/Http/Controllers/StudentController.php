@@ -54,11 +54,11 @@ class StudentController extends Controller
         // Validate the form inputs
         $request->validate([
             'name' => 'required|max:255',
-            'email' => 'required|email|unique:students,email',
+            'email' => 'required|email|unique:students,email,' . ($student->id ?? 'NULL') . ',id',
             'phone' => 'required|digits:8',
             'dob' => 'required|date',
             'college_id' => 'required|exists:colleges,id',
-        ]);
+        ]);        
 
         // Create and save the student
         Student::create($request->all());
@@ -85,11 +85,12 @@ class StudentController extends Controller
         // Validate the input fields
         $request->validate([
             'name' => 'required|max:255',
-            'email' => 'required|email|unique:students,email,' . $student->id,
+            'email' => 'required|email|unique:students,email,' . ($student->id ?? 'NULL') . ',id',
             'phone' => 'required|digits:8',
             'dob' => 'required|date',
             'college_id' => 'required|exists:colleges,id',
         ]);
+        
 
         // Update the student details
         $student->update($request->all());

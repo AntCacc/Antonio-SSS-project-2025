@@ -14,6 +14,9 @@
     </style>
 </head>
 <body class="flex flex-col min-h-screen bg-gray-100 font-sans">
+    
+
+
     <!-- Top Navigation Bar -->
     <div class="bg-blue-900 text-white py-4">
         <div class="container mx-auto flex items-center justify-between px-4">
@@ -26,6 +29,23 @@
             </div>
         </div>
     </div>
+
+    @if (session('success'))
+        <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mt-3 mx-8" role="alert" id="alert-success">
+            <strong class="font-bold">Success! </strong>
+            <span class="block sm:inline">{{ session('success') }}</span>
+        </div>
+    @endif
+
+
+
+    <script>
+        // auto-hide success alert after 4 seconds
+        setTimeout(() => {
+            const alert = document.getElementById('alert-success');
+            if (alert) alert.remove();
+        }, 4000);
+    </script>
 
     <!-- Main Content -->
     <div class="container mx-auto mt-8 px-4 flex-grow">

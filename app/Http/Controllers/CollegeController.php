@@ -39,9 +39,9 @@ class CollegeController extends Controller
     {
         // Validate form inputs
         $request->validate([
-            'name' => 'required|unique:colleges,name|max:255',
-            'address' => 'required|max:255',
-        ]);
+            'name' => 'required|unique:colleges,name,' . ($college->id ?? 'NULL') . ',id', // The uniqueness check excludes the current college's ID (if it exists) to allow updating without conflict.
+            'address' => 'required'
+        ]);        
 
         // Create and save the college
         College::create($request->all());
@@ -66,9 +66,9 @@ class CollegeController extends Controller
     {
         // Validate the input fields
         $request->validate([
-            'name' => 'required|unique:colleges,name,' . $college->id . '|max:255',
-            'address' => 'required|max:255',
-        ]);
+            'name' => 'required|unique:colleges,name,' . ($college->id ?? 'NULL') . ',id', // The uniqueness check excludes the current college's ID (if it exists) to allow updating without conflict.
+            'address' => 'required'
+        ]);        
 
         // Update the college details
         $college->update($request->all());
